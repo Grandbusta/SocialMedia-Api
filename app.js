@@ -4,11 +4,13 @@ const path = require('path')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const { testDbConnection } = require('./src/config/db')
+const { headers } = require('./src/middlewares/headers')
 
 const users = require('./src/routes/users')
 
 const app = express()
 
+app.use(headers)
 testDbConnection()
 app.use(logger('dev'))
 app.use(express.json())
