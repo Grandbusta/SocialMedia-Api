@@ -48,7 +48,7 @@ exports.adminAuth = async (req, res, next) => {
         })
       }
     } else {
-      res.status(422).json({ message: 'token not present in header' })
+      res.status(422).json({ message: 'Token not present in header' })
     }
   } catch (error) {
     console.error(error)
