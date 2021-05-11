@@ -7,6 +7,7 @@ const { testDbConnection } = require('./src/config/db')
 const { headers } = require('./src/middlewares/headers')
 
 const users = require('./src/routes/users')
+const posts = require('./src/routes/posts')
 
 const app = express()
 
@@ -18,6 +19,8 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 
 app.use('/users', users)
+app.use('/posts', posts)
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404))
