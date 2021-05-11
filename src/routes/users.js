@@ -11,6 +11,5 @@ router.patch('/update/:id', userAuth, update)
 
 //User posts routes
 router.get('/:userId/posts', getAllPosts)
-router.get('/:userId/posts/:postId', getSinglePost)
 
 module.exports = router
