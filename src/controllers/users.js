@@ -99,7 +99,7 @@ const login = async (req, res, next) => {
 const remove = async (req, res, next) => {
   try {
     await User.destroy({ where: { id: req.userData.id } })
-    res.status(204).json({
+    res.status(200).json({
       response: 'user deleted sucessfully',
     })
   } catch (error) {
@@ -112,7 +112,7 @@ const remove = async (req, res, next) => {
 const update = async (req, res, next) => {
   try {
     await User.update({ ...req.body }, { where: { id: req.userData.id } })
-    res.status(204).json({
+    res.status(200).json({
       message: 'update successful',
     })
   } catch (error) {
