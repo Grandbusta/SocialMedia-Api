@@ -11,21 +11,48 @@ const createNewPost = async (req, res, next) => {
 }
 
 const deletePost = async (req, res, next) => {
-  const post = await Post.destroy({ where: { id: req.params.postId } })
-  res.status(200).json({
-    post,
-  })
+  try {
+    const post = await Post.destroy({
+      where: { id: req.params.postId, UserId: req.userData.id },
+    })
+    if (post) {
+      res.status(200).json({
+        response: 'success',
+      })
+    } else {
+      res.status(404).json({
+        response: 'Not found',
+      })
+    }
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({
+      response: 'error occured',
+    })
+  }
 }
 
 const updatePost = () => {}
 
 const getSinglePost = async (req, res, next) => {
-  const post = await Post.findOne({ where: { id: req.params.postId } })
-  // if(post){
-  res.status(200).json({
-    post,
-  })
-  // }
+  try {
+    const post = await Post.findOne({ where: { id: req.params.postId } })
+    if (post) {
+      res.status(200).json({
+        response: 'success',
+        data: post,
+      })
+    } else {
+      res.status(404).json({
+        response: 'Not found',
+      })
+    }
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({
+      response: 'error occured',
+    })
+  }
 }
 
 module.exports = {

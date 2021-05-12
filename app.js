@@ -8,6 +8,7 @@ const { headers } = require('./src/middlewares/headers')
 
 const users = require('./src/routes/users')
 const posts = require('./src/routes/posts')
+const comments = require('./src/routes/comments')
 
 const app = express()
 
@@ -20,6 +21,7 @@ app.use(cookieParser())
 
 app.use('/users', users)
 app.use('/posts', posts)
+app.use('/comments', comments)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
