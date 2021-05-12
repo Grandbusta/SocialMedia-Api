@@ -10,7 +10,12 @@ const createNewPost = async (req, res, next) => {
   res.status(200).json({ newPost })
 }
 
-const deletePost = () => {}
+const deletePost = async (req, res, next) => {
+  const post = await Post.destroy({ where: { id: req.params.postId } })
+  res.status(200).json({
+    post,
+  })
+}
 
 const updatePost = () => {}
 
