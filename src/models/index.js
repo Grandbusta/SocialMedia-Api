@@ -11,4 +11,4 @@ User.belongsToMany(User, { through: UserFriend, as: 'friend' })
 Post.hasMany(Like)
 Post.hasMany(Comment)
 
-module.exports = { User, Post, Like, Comment }
+module.exports = { User, Post, Like, Comment, UserFriend }

@@ -14,9 +14,7 @@ const signUp = async (req, res, next) => {
           attributes: ['email'],
         })
         if (check !== null) {
-          res.status(409).json({
-            response: 'user already exist',
-          })
+          res.status(409).json({ response: 'user already exist' })
         } else {
           let createUser = await User.create({
             email: email,
@@ -25,25 +23,17 @@ const signUp = async (req, res, next) => {
             password: await bcrypt.hash(password, 10),
           })
           if (createUser) {
-            res.status(201).json({
-              response: 'user created successfully',
-            })
+            res.status(201).json({ response: 'user created successfully' })
           }
         }
       } else {
-        res.status(401).json({
-          response: 'email is not valid',
-        })
+        res.status(401).json({ response: 'email is not valid' })
       }
     } else {
-      res.status(401).json({
-        response: 'one or more values is missing',
-      })
+      res.status(401).json({ response: 'one or more values is missing' })
     }
   } catch (error) {
-    res.status(500).json({
-      response: 'an error occured',
-    })
+    res.status(500).json({ response: 'an error occured' })
   }
 }
 
@@ -61,64 +51,41 @@ const login = async (req, res, next) => {
           if (comparePassword) {
             res.status(200).json({
               response: 'Auth successful',
-              token: jwt.sign(
-                {
-                  email: check.email,
-                },
-                JWT_KEY,
-              ),
+              token: jwt.sign({ email: check.email }, JWT_KEY),
             })
           } else {
-            res.status(401).json({
-              response: 'Auth failed',
-            })
+            res.status(401).json({ response: 'Auth failed' })
           }
         } else {
-          res.status(404).json({
-            response: 'user not found',
-          })
+          res.status(404).json({ response: 'user not found' })
         }
       } else {
-        res.status(422).json({
-          response: 'not a valid email',
-        })
+        res.status(422).json({ response: 'not a valid email' })
       }
     } else {
-      res.status(422).json({
-        response: 'one or more values are missing',
-      })
+      res.status(422).json({ response: 'one or more values are missing' })
     }
   } catch (error) {
     console.error(error)
-    res.status(500).json({
-      response: 'An error occured',
-    })
+    res.status(500).json({ response: 'An error occured' })
   }
 }
 
 const remove = async (req, res, next) => {
   try {
     await User.destroy({ where: { id: req.userData.id } })
-    res.status(200).json({
-      response: 'user deleted sucessfully',
-    })
+    res.status(200).json({ response: 'user deleted sucessfully' })
   } catch (error) {
-    res.status(500).json({
-      message: 'An error occured',
-    })
+    res.status(500).json({ message: 'An error occured' })
   }
 }
 
 const update = async (req, res, next) => {
   try {
     await User.update({ ...req.body }, { where: { id: req.userData.id } })
-    res.status(200).json({
-      message: 'update successful',
-    })
+    res.status(200).json({ message: 'update successful' })
   } catch (error) {
-    res.status(500).json({
-      message: 'An error occured',
-    })
+    res.status(500).json({ message: 'An error occured' })
   }
 }
 

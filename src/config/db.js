@@ -9,7 +9,7 @@ const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
 testDbConnection = async () => {
   try {
     await sequelize.authenticate()
-    sequelize.sync({ alter: true })
+    // sequelize.sync({ alter: true })
   } catch (error) {
     console.error(error)
   }
