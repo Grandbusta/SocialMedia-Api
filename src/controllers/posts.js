@@ -1,13 +1,27 @@
 const { User, Post } = require('../models')
+const cloudinary = require('../config/cloudinary')
+const fs = require('fs')
 
 const createNewPost = async (req, res, next) => {
-  const { img_url, caption } = req.body
-  const newPost = await Post.create({
-    img_url: img_url,
-    caption: caption,
-    UserId: req.userData.id,
-  })
-  res.status(200).json({ newPost })
+  try {
+    const { path } = req.file
+    if (path) {
+      const { caption } = req.body
+      const { url } = await cloudinary.uploads(path, 'SocialMedia')
+      fs.unlinkSync(path)
+      const newPost = await Post.create({
+        img_url: url,
+        caption: caption,
+        UserId: req.userData.id,
+      })
+      res.status(200).json({ newPost })
+    } else {
+      res.status(422).json({ response: 'image not present in body' })
+    }
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ response: 'error occured' })
+  }
 }
 
 const deletePost = async (req, res, next) => {
@@ -32,7 +46,7 @@ const deletePost = async (req, res, next) => {
   }
 }
 
-const updatePost = () => {}
+const updatePost = (req, res, next) => {}
 
 const getSinglePost = async (req, res, next) => {
   try {
