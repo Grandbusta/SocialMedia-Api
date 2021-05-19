@@ -1,6 +1,6 @@
-## Docs
+# API Documentation
 
-### Users endpoints
+## Users endpoints
 
 Login User:
 
@@ -38,7 +38,7 @@ Get all Users Friends:
 GET /users/:userID/friends
 ```
 
-### Post endpoints
+## Post endpoints
 
 Create new post:
 
@@ -64,7 +64,7 @@ Get a single post:
 GET /posts/:postID
 ```
 
-### Likes endpoints
+## Likes endpoints
 
 Like/Unlike a post:
 
@@ -72,7 +72,7 @@ Like/Unlike a post:
 POST /likes
 ```
 
-### Friends endpoints
+## Friends endpoints
 
 Add a friend:
 
@@ -84,4 +84,18 @@ Remove a friend:
 
 ```
 POST /friends/remove
+```
+
+## Comment endpoints
+
+Create a comment:
+
+```
+POST /comments/
+```
+
+Edit a comment:
+
+```
+PATCH /comments/:commentId
 ```
