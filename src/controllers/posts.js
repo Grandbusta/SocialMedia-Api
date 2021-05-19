@@ -1,4 +1,4 @@
-const { User, Post } = require('../models')
+const { User, Post, Comment } = require('../models')
 const cloudinary = require('../config/cloudinary')
 const fs = require('fs')
 
@@ -50,11 +50,19 @@ const updatePost = (req, res, next) => {}
 
 const getSinglePost = async (req, res, next) => {
   try {
-    const post = await Post.findOne({ where: { id: req.params.postId } })
+    const post = await Post.findOne({
+      where: { id: req.params.postId },
+      include: [
+        {
+          model: Comment,
+          attributes: ['id', 'text', 'createdAt', 'updatedAt'],
+        },
+      ],
+    })
     if (post) {
       res.status(200).json({
         response: 'success',
-        data: post,
+        post: post,
       })
     } else {
       res.status(404).json({

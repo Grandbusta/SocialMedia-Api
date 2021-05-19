@@ -1,4 +1,4 @@
-const { User, UserFriend } = require('../models')
+const { User, UserFriend, Post } = require('../models')
 
 const addFriend = async (req, res, next) => {
   const { friendId } = req.body
@@ -59,7 +59,6 @@ const removeFriend = async (req, res, next) => {
 
 const getAllUserFriends = async (req, res, next) => {
   const userId = req.params.userId
-  console.log(userId)
   const allFriends = await User.findOne({
     where: { id: userId },
     attributes: ['id', 'first_name', 'last_name'],

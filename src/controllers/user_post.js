@@ -1,4 +1,4 @@
-const { User, Post } = require('../models')
+const { User, Post, Comment } = require('../models')
 
 const getAllPosts = async (req, res, next) => {
   try {
@@ -27,6 +27,25 @@ const getAllPosts = async (req, res, next) => {
   }
 }
 
+const getFeeds = async (req, res, next) => {
+  const userId = req.params.userId
+  const allFriends = await User.findOne({
+    where: { id: userId },
+    attributes: ['id', 'first_name', 'last_name'],
+    include: [
+      {
+        model: User,
+        attributes: ['id', 'first_name', 'last_name'],
+        as: 'friend',
+        include: [{ model: Post }],
+        through: { attributes: [] },
+      },
+    ],
+  })
+  res.status(200).json({ user: allFriends })
+}
+
 module.exports = {
   getAllPosts,
+  getFeeds,
 }
