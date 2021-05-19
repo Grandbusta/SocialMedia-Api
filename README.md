@@ -31,7 +31,7 @@ Star⭐ the repo if you like what you see😉.
 - [x] Edit post
 - [x] Like/Unlike post
 - [x] Comment on post
-- [x] Edit post Comment
+- [x] Edit Comment
 
 ### Making requests
 
@@ -39,12 +39,42 @@ Always attach the token on the request header
 
 ## Docs
 
-#### Users routes
+### Users endpoints
 
-Signin:
+Login User:
 
 ```
 POST users/signin
+```
+
+Create a new user:
+
+```
+POST users/signup
+```
+
+Delete User:
+
+```
+DELETE users/delete
+```
+
+Update User:
+
+```
+PATCH users/update
+```
+
+Get all Users Posts:
+
+```
+GET /users/:userID/posts
+```
+
+Get all Users Friends:
+
+```
+GET /users/:userID/friends
 ```
 
 ## 🤓 Author(s)

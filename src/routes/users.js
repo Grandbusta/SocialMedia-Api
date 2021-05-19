@@ -7,8 +7,8 @@ const { getAllUserFriends } = require('../controllers/friends')
 
 router.post('/signup', signUp)
 router.post('/login', login)
-router.delete('/delete/:id', userAuth, remove)
-router.patch('/update/:id', userAuth, update)
+router.delete('/delete', userAuth, remove)
+router.patch('/update', userAuth, update)
 
 //User posts routes
 router.get('/:userId/posts', getAllPosts)
