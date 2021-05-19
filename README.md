@@ -9,7 +9,7 @@ Star⭐ the repo if you like what you see😉.
 - [Getting Started](#getting-started)
   - [Features](#features)
   - [Making requests](#making-requests)
-- [Docs](#docs)
+- [Docs](DOCUMENTATION.md)
 
 ## Technologies
 
@@ -36,46 +36,6 @@ Star⭐ the repo if you like what you see😉.
 ### Making requests
 
 Always attach the token on the request header
-
-## Docs
-
-### Users endpoints
-
-Login User:
-
-```
-POST users/signin
-```
-
-Create a new user:
-
-```
-POST users/signup
-```
-
-Delete User:
-
-```
-DELETE users/delete
-```
-
-Update User:
-
-```
-PATCH users/update
-```
-
-Get all Users Posts:
-
-```
-GET /users/:userID/posts
-```
-
-Get all Users Friends:
-
-```
-GET /users/:userID/friends
-```
 
 ## 🤓 Author(s)
 
