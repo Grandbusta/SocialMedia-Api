@@ -1,7 +1,7 @@
 const { sq } = require('../config/db')
 const { DataTypes } = require('sequelize')
 
-const User_Friend = sq.define('User_Friend', {
+const User_Friend = sq.define('user_friend', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,

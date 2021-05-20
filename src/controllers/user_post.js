@@ -1,4 +1,4 @@
-const { User, Post, Comment } = require('../models')
+const { User, Post, Comment, Like } = require('../models')
 
 const getAllPosts = async (req, res, next) => {
   try {
@@ -11,7 +11,7 @@ const getAllPosts = async (req, res, next) => {
       res.status(200).json({
         response: {
           userId: userPost.id,
-          posts: userPost.Posts,
+          posts: userPost.posts,
         },
       })
     } else {
@@ -37,7 +37,19 @@ const getFeeds = async (req, res, next) => {
         model: User,
         attributes: ['id', 'first_name', 'last_name'],
         as: 'friend',
-        include: [{ model: Post, attributes: { exclude: ['UserId'] } }],
+        include: [
+          {
+            model: Post,
+            include: [
+              { model: Comment, attributes: { exclude: ['PostId'] } },
+              {
+                model: Like,
+                attributes: { exclude: ['PostId'] },
+              },
+            ],
+            attributes: { exclude: ['UserId'] },
+          },
+        ],
         through: { attributes: [] },
       },
     ],
@@ -45,7 +57,7 @@ const getFeeds = async (req, res, next) => {
   let postArr = []
   const allFriend = JSON.parse(JSON.stringify(allFriends))
   allFriend.friend.forEach(friend => {
-    friend.Posts.forEach(post => {
+    friend.posts.forEach(post => {
       postArr.push({
         user: {
           first_name: friend.first_name,

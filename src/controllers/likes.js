@@ -11,10 +11,7 @@ const like = async (req, res, next) => {
           where: { UserId: userId, PostId: postId },
         })
         if (checkLike) {
-          await Like.update(
-            { state: !checkLike.state },
-            { where: { UserId: userId, PostId: postId } },
-          )
+          await Like.destroy({ where: { UserId: userId, PostId: postId } })
           res.status(200).json({
             response: 'success',
             likeState: !checkLike.state,

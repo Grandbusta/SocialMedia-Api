@@ -1,7 +1,7 @@
 const { sq } = require('../config/db')
 const { DataTypes } = require('sequelize')
 
-const Like = sq.define('Like', {
+const Like = sq.define('like', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
