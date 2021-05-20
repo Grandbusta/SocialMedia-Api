@@ -37,12 +37,29 @@ const getFeeds = async (req, res, next) => {
         model: User,
         attributes: ['id', 'first_name', 'last_name'],
         as: 'friend',
-        include: [{ model: Post }],
+        include: [{ model: Post, attributes: { exclude: ['UserId'] } }],
         through: { attributes: [] },
       },
     ],
   })
-  res.status(200).json({ user: allFriends })
+  let postArr = []
+  const allFriend = JSON.parse(JSON.stringify(allFriends))
+  allFriend.friend.forEach(friend => {
+    friend.Posts.forEach(post => {
+      postArr.push({
+        user: {
+          first_name: friend.first_name,
+          last_name: friend.last_name,
+          id: friend.id,
+        },
+        ...post,
+      })
+    })
+  })
+  const sortedArr = postArr.sort(
+    (a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime(),
+  )
+  res.status(200).json({ feed: sortedArr })
 }
 
 module.exports = {
