@@ -11,13 +11,13 @@ const addFriend = async (req, res, next) => {
         const checkFriend = await User.findOne({ where: { id: friendId } })
         if (checkFriend) {
           const isAdded = await UserFriend.findOne({
-            where: { UserId: userId, friendId: friendId },
+            where: { userId: userId, friendId: friendId },
           })
           if (isAdded) {
             res.status(200).json({ response: 'already added', isFriend: true })
           } else {
             const newFriend = await UserFriend.create({
-              UserId: userId,
+              userId: userId,
               friendId: friendId,
             })
             res.status(200).json({ response: 'added', isFriend: true })
@@ -41,11 +41,11 @@ const removeFriend = async (req, res, next) => {
   try {
     if (friendId) {
       const isAdded = await UserFriend.findOne({
-        where: { UserId: userId, friendId: friendId },
+        where: { userId: userId, friendId: friendId },
       })
       if (isAdded) {
         await UserFriend.destroy({
-          where: { UserId: userId, friendId: friendId },
+          where: { userId: userId, friendId: friendId },
         })
         res.status(200).json({ response: 'removed', isFriend: false })
       } else {
@@ -54,24 +54,32 @@ const removeFriend = async (req, res, next) => {
     } else {
       res.status(422).json({ response: 'friendId not preent' })
     }
-  } catch (error) {}
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ response: 'error occured' })
+  }
 }
 
 const getAllUserFriends = async (req, res, next) => {
   const userId = req.params.userId
-  const allFriends = await User.findOne({
-    where: { id: userId },
-    attributes: ['id', 'first_name', 'last_name'],
-    include: [
-      {
-        model: User,
-        attributes: ['id', 'first_name', 'last_name'],
-        as: 'friend',
-        through: { attributes: [] },
-      },
-    ],
-  })
-  res.status(200).json({ user: allFriends })
+  try {
+    const allFriends = await User.findOne({
+      where: { id: userId },
+      attributes: ['id', 'first_name', 'last_name'],
+      include: [
+        {
+          model: User,
+          attributes: ['id', 'first_name', 'last_name'],
+          as: 'friend',
+          through: { attributes: [] },
+        },
+      ],
+    })
+    res.status(200).json({ user: allFriends })
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ response: 'error occured' })
+  }
 }
 
 module.exports = {

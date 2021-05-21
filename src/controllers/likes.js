@@ -8,16 +8,16 @@ const like = async (req, res, next) => {
       const checkPost = await Post.findOne({ where: { id: postId } })
       if (checkPost) {
         const checkLike = await Like.findOne({
-          where: { UserId: userId, PostId: postId },
+          where: { userId: userId, postId: postId },
         })
         if (checkLike) {
-          await Like.destroy({ where: { UserId: userId, PostId: postId } })
+          await Like.destroy({ where: { userId: userId, postId: postId } })
           res.status(200).json({
             response: 'success',
             likeState: !checkLike.state,
           })
         } else {
-          await Like.create({ state: true, UserId: userId, PostId: postId })
+          await Like.create({ state: true, userId: userId, postId: postId })
           res.status(200).json({
             response: 'success',
             likeState: true,

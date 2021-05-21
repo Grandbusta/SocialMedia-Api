@@ -12,7 +12,7 @@ const createNewPost = async (req, res, next) => {
       const newPost = await Post.create({
         img_url: url,
         caption: caption,
-        UserId: req.userData.id,
+        userId: req.userData.id,
       })
       res.status(200).json({ newPost })
     } else {
@@ -27,7 +27,7 @@ const createNewPost = async (req, res, next) => {
 const deletePost = async (req, res, next) => {
   try {
     const post = await Post.destroy({
-      where: { id: req.params.postId, UserId: req.userData.id },
+      where: { id: req.params.postId, userId: req.userData.id },
     })
     if (post) {
       res.status(200).json({

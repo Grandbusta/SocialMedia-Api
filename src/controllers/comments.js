@@ -8,8 +8,8 @@ const createComment = async (req, res, next) => {
       if (text) {
         const comment = await Comment.create({
           text: text,
-          PostId: postId,
-          UserId: req.userData.id,
+          postId: postId,
+          userId: req.userData.id,
         })
         res.status(200).json({
           response: 'success',
@@ -37,7 +37,7 @@ const editComment = async (req, res, next) => {
   try {
     const [updateComment] = await Comment.update(
       { text: req.body.text },
-      { where: { id: req.params.commentId, UserId: req.userData.id } },
+      { where: { id: req.params.commentId, userId: req.userData.id } },
     )
     if (updateComment) {
       res.status(200).json({
