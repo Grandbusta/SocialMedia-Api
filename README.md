@@ -9,7 +9,7 @@ Star⭐ the repo if you like what you see😉.
 - [Getting Started](#getting-started)
   - [Features](#features)
   - [Making requests](#making-requests)
-- [Docs](DOCUMENTATION.md)
+- [Docs](https://documenter.getpostman.com/view/11680593/TzXtJfzY)
 
 ## Technologies
 
