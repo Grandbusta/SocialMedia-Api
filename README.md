@@ -1,9 +1,12 @@
 # Social Media API - NodeJS🔥 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![Twitter Follow](https://img.shields.io/twitter/follow/iamgrandbusta?style=social)](https://twitter.com/iamgrandbusta)
 
 A Social media Api built with NodeJS and Express framework. Improving day by day.
+
+[Here](https://ohsocial.herokuapp.com/) is the link to the API base URL
+
 Star⭐ the repo if you like what you see😉.
 
-## ✨Table of contents
+## 📖Table of contents
 
 - [Techologies](#technologies)
 - [Getting Started](#getting-started)
@@ -11,16 +14,16 @@ Star⭐ the repo if you like what you see😉.
   - [Making requests](#making-requests)
 - [Docs](https://documenter.getpostman.com/view/11680593/TzXtJfzY)
 
-## Technologies
+## 🛠️Technologies
 
 - NodeJS
 - ExpressJS
 - Mysql
 - Sequelize ORM
 
-## Getting Started
+## ⛷️Getting Started
 
-### Features
+### ✨Features
 
 - [x] User Signin
 - [x] User Signup
@@ -33,7 +36,7 @@ Star⭐ the repo if you like what you see😉.
 - [x] Comment on post
 - [x] Edit Comment
 
-### Making requests
+### 📮Making requests
 
 Always attach the token on the request header
 
