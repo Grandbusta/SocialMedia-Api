@@ -17,7 +17,7 @@ exports.uploads = (file, folder) => {
       },
       (err, result) => {
         if (err) {
-          reject()
+          reject(err)
         } else {
           resolve({
             id: result.public_id,

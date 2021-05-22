@@ -14,7 +14,8 @@ const createNewPost = async (req, res, next) => {
         caption: caption,
         userId: req.userData.id,
       })
-      res.status(200).json({ newPost })
+      console.log(url, caption)
+      res.status(200).json({ post: newPost })
     } else {
       res.status(422).json({ response: 'image not present in body' })
     }
